@@ -1366,6 +1366,7 @@ The available `[OPTIONS]` are:
 - [`--link`](#copy---link)
 - [`--parents`](#copy---parents)
 - [`--exclude`](#copy---exclude)
+- [`--from`](#copy---from)
 
 The `COPY` instruction copies new files or directories from `<src>`
 and adds them to the filesystem of the container at the path `<dest>`.
@@ -1418,11 +1419,6 @@ COPY arr[[]0].txt /mydir/
 > If you build using STDIN (`docker build - < somefile`), there is no
 > build context, so `COPY` can't be used.
 
-Optionally `COPY` accepts a flag `--from=<name>` that can be used to set
-the source location to a previous build stage (created with `FROM .. AS <name>`)
-that will be used instead of a build context sent by the user. In case a build
-stage with a specified name can't be found an image with the same name is
-attempted to be used instead.
 
 `COPY` obeys the following rules:
 
@@ -1461,6 +1457,14 @@ attempted to be used instead.
 > See the [Dockerfile Best Practices
 > guide – Leverage build cache](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#leverage-build-cache)
 > for more information.
+
+### COPY --from
+
+Optionally `COPY` accepts a flag `--from=<name>` that can be used to set
+the source location to a previous build stage (created with `FROM .. AS <name>`)
+that will be used instead of a build context sent by the user. In case a build
+stage with a specified name can't be found an image with the same name is
+attempted to be used instead.
 
 ### COPY --chown --chmod
 
